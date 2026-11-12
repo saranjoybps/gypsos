@@ -8,12 +8,39 @@ import type { Invoice, InvoiceItem, Product, RequestItem, StockMovement, StockRe
 /* Firebase Admin (service account comes from the FIREBASE_SERVICE_ACCOUNT env var, one-line JSON) */
 /* ------------------------------------------------------------------ */
 
+type ServiceAccount = { project_id: string; client_email: string; private_key: string };
+
+/**
+ * Reads FIREBASE_SERVICE_ACCOUNT leniently, because hosting dashboards often alter pasted/imported values:
+ * surrounding quotes kept, escaped quotes, real line breaks inside the key, or the JSON given as base64.
+ */
+function readServiceAccount(): ServiceAccount {
+  let raw = (process.env.FIREBASE_SERVICE_ACCOUNT ?? "").trim();
+  if (!raw) throw new ApiError(500, "Server is not configured: FIREBASE_SERVICE_ACCOUNT is missing.");
+  if ((raw.startsWith("'") && raw.endsWith("'")) || (raw.startsWith('"') && raw.endsWith('"'))) raw = raw.slice(1, -1).trim();
+  if (!raw.startsWith("{")) {
+    try {
+      raw = Buffer.from(raw, "base64").toString("utf8").trim();
+    } catch {
+      /* handled below */
+    }
+  }
+  const attempts = [raw, raw.replace(/\\"/g, '"'), raw.replace(/\r?\n/g, "\\n"), raw.replace(/\\"/g, '"').replace(/\r?\n/g, "\\n")];
+  for (const text of attempts) {
+    try {
+      const sa = JSON.parse(text) as Partial<ServiceAccount>;
+      if (sa.project_id && sa.client_email && sa.private_key) return sa as ServiceAccount;
+    } catch {
+      /* try the next variant */
+    }
+  }
+  throw new ApiError(500, "Server is not configured: FIREBASE_SERVICE_ACCOUNT could not be read. Paste the full service account JSON on one line (no extra quotes).");
+}
+
 function adminApp(): App {
   const existing = getApps()[0];
   if (existing) return existing;
-  const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
-  if (!raw) throw new ApiError(500, "Server is not configured: FIREBASE_SERVICE_ACCOUNT is missing.");
-  const sa = JSON.parse(raw) as { project_id: string; client_email: string; private_key: string };
+  const sa = readServiceAccount();
   return initializeApp({ credential: cert({ projectId: sa.project_id, clientEmail: sa.client_email, privateKey: sa.private_key.replace(/\\n/g, "\n") }) });
 }
 
