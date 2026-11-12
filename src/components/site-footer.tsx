@@ -9,8 +9,8 @@ const LINKS = [
   { href: "#benefits", label: "Benefits" },
   { href: "#applications", label: "Applications" },
   { href: "#directors", label: "Directors" },
-  { href: "#calculator", label: "Cost calculator" },
-  { href: "#contact", label: "Contact" },
+  { href: "#calculator", label: "Estimate cost" },
+  { href: "#contact", label: "Enquiry" },
 ];
 
 export function SiteFooter() {
@@ -27,7 +27,7 @@ export function SiteFooter() {
             </a>
             <p className="mt-6 text-[13px] uppercase tracking-[0.22em] text-cream/80">GYPSOS Buildtech India Private Limited</p>
             <p className="mt-4 max-w-sm text-[14px] leading-7 text-cream/65">
-              A gypsum plaster brand established in 2020: premium, professional, affordable and innovative plastering solutions for builders, contractors and homeowners
+              A gypsum plaster brand established in 2026: premium, professional, affordable and innovative plastering solutions for builders, contractors and homeowners
               across India.
             </p>
           </div>

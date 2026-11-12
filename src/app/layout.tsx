@@ -18,7 +18,7 @@ const serif = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "GYPSOS | Premium Grade Gypsum Plaster by GYPSOS Buildtech India",
   description:
-    "GYPSOS Buildtech India Private Limited: premium-grade gypsum plaster for smooth, affordable interior wall and ceiling finishing across India. Established 2020.",
+    "GYPSOS Buildtech India Private Limited: premium-grade gypsum plaster for smooth, affordable interior wall and ceiling finishing across India. Established 2026.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

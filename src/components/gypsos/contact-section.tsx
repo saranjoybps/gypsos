@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2, Mail, Phone } from "lucide-react";
 import { useRef, useState, type FormEvent } from "react";
 import { ScrubIn, WordReveal } from "@/components/motion/scroll-primitives";
 import { ENQUIRER_TYPES, validateEnquiry, type EnquiryErrors, type EnquiryInput } from "@/lib/enquiry";
@@ -73,7 +73,7 @@ export function ContactSection() {
       <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <ScrubIn y={24}>
-            <p className="text-[10px] font-medium uppercase tracking-[0.46em] text-ochre-deep">Contact</p>
+            <p className="text-[10px] font-medium uppercase tracking-[0.46em] text-ochre-deep">Enquiry</p>
           </ScrubIn>
           <WordReveal text="Let’s plan your next wall." className="mt-5 font-serif text-[clamp(38px,5vw,76px)] font-medium leading-[1.02] text-graphite" />
           <ScrubIn y={24} className="mt-8 max-w-md text-[15px] leading-7 text-ink/80">
@@ -84,6 +84,20 @@ export function ContactSection() {
                   {type}
                 </li>
               ))}
+            </ul>
+            <ul className="mt-8 space-y-3" aria-label="Contact details">
+              <li>
+                <a href="mailto:support@gypsos.in" className="link-underline inline-flex items-center gap-3 text-[15px] font-medium text-graphite">
+                  <Mail size={18} strokeWidth={1.4} className="text-ochre-deep" aria-hidden="true" />
+                  support@gypsos.in
+                </a>
+              </li>
+              <li>
+                <a href="tel:+918489848936" className="link-underline inline-flex items-center gap-3 text-[15px] font-medium text-graphite">
+                  <Phone size={18} strokeWidth={1.4} className="text-ochre-deep" aria-hidden="true" />
+                  8489848936
+                </a>
+              </li>
             </ul>
           </ScrubIn>
         </div>

@@ -12,7 +12,7 @@ export function MetricsSection() {
           <div className="bg-graphite py-10 sm:pr-8 lg:py-4">
             <dt className="text-[11px] uppercase tracking-[0.3em] text-white/50">Established</dt>
             <dd className="mt-5 font-serif text-[clamp(64px,8vw,116px)] font-medium leading-none">
-              <CountUp from={2000} to={2020} />
+              <CountUp from={2000} to={2026} />
             </dd>
             <p className="mt-4 max-w-[220px] text-[13px] leading-6 text-white/65">Founded as GYPSOS Buildtech India Private Limited.</p>
           </div>
@@ -34,6 +34,26 @@ export function MetricsSection() {
               <CountUp from={0} to={4} duration={1.2} />
             </dd>
             <p className="mt-4 max-w-[240px] text-[13px] leading-6 text-white/65">Premium, professional, affordable and innovative.</p>
+          </div>
+        </dl>
+        <dl className="mt-px grid gap-px bg-white/10 sm:grid-cols-3">
+          <div className="bg-graphite py-10 sm:pr-8 lg:py-8">
+            <dt className="text-[11px] uppercase tracking-[0.3em] text-white/50">Architects</dt>
+            <dd className="mt-5 font-serif text-[clamp(56px,7vw,96px)] font-medium leading-none">
+              <CountUp from={0} to={100} />+
+            </dd>
+          </div>
+          <div className="bg-graphite py-10 sm:px-8 lg:py-8">
+            <dt className="text-[11px] uppercase tracking-[0.3em] text-white/50">Builders &amp; promoters</dt>
+            <dd className="mt-5 font-serif text-[clamp(56px,7vw,96px)] font-medium leading-none text-ochre">
+              <CountUp from={0} to={200} />+
+            </dd>
+          </div>
+          <div className="bg-graphite py-10 sm:pl-8 lg:py-8">
+            <dt className="text-[11px] uppercase tracking-[0.3em] text-white/50">Individual home owners</dt>
+            <dd className="mt-5 font-serif text-[clamp(56px,7vw,96px)] font-medium leading-none">
+              <CountUp from={0} to={500} />+
+            </dd>
           </div>
         </dl>
       </div>

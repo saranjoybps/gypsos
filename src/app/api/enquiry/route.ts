@@ -1,3 +1,4 @@
+import nodemailer from "nodemailer";
 import { validateEnquiry, type EnquiryInput } from "@/lib/enquiry";
 
 /**
@@ -37,6 +38,16 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, errors }, { status: 422 });
   }
 
+  const smtpReady = Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
+  if (smtpReady) {
+    try {
+      await sendEnquiryEmail(input);
+    } catch (error) {
+      console.error("Enquiry email failed:", error instanceof Error ? error.message : "unknown error");
+      return Response.json({ ok: false, error: "We could not send your enquiry right now. Please try again shortly." }, { status: 502 });
+    }
+  }
+
   const webhook = process.env.ENQUIRY_WEBHOOK_URL;
   if (webhook) {
     try {
@@ -51,5 +62,42 @@ export async function POST(request: Request) {
     }
   }
 
-  return Response.json({ ok: true, delivered: Boolean(webhook) });
+  return Response.json({ ok: true, delivered: smtpReady || Boolean(webhook) });
+}
+
+const esc = (value: string) => value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
+const oneLine = (value: string) => value.replace(/[\r\n]+/g, " ").trim();
+
+/** Sends the enquiry to the GYPSOS inbox over SMTP (Zoho, STARTTLS on 587). Credentials come from server env only. */
+async function sendEnquiryEmail(input: EnquiryInput) {
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT ?? 587),
+    secure: Number(process.env.SMTP_PORT ?? 587) === 465,
+    requireTLS: true,
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+  });
+
+  const rows: [string, string][] = [
+    ["Name", input.name],
+    ["Organisation", input.organisation],
+    ["Role", input.role],
+    ["Mobile", input.phone],
+    ["Email", input.email],
+    ["City", input.city],
+    ["Area (sq. ft.)", input.area],
+    ["Message", input.message],
+  ];
+  const filled = rows.filter(([, v]) => v.trim() !== "");
+
+  await transporter.sendMail({
+    from: `"GYPSOS Website" <${process.env.SMTP_USER}>`,
+    to: process.env.ENQUIRY_TO ?? process.env.SMTP_USER,
+    replyTo: oneLine(input.email),
+    subject: `New website enquiry from ${oneLine(input.name)}`,
+    text: filled.map(([k, v]) => `${k}: ${v}`).join("\n"),
+    html: `<table cellpadding="6" style="font-family:Arial,sans-serif;font-size:14px">${filled
+      .map(([k, v]) => `<tr><td style="font-weight:bold;vertical-align:top">${esc(k)}</td><td>${esc(v).replace(/\n/g, "<br>")}</td></tr>`)
+      .join("")}</table>`,
+  });
 }

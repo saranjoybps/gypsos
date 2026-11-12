@@ -3,8 +3,8 @@ export const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#history", label: "History" },
   { href: "#product", label: "Product" },
-  { href: "#calculator", label: "Calculator" },
-  { href: "#contact", label: "Contact" },
+  { href: "#calculator", label: "Estimate cost" },
+  { href: "#contact", label: "Enquiry" },
 ] as const;
 
 export const MENU_LINKS = [
@@ -16,6 +16,6 @@ export const MENU_LINKS = [
   { href: "#benefits", label: "Benefits" },
   { href: "#applications", label: "Applications" },
   { href: "#directors", label: "Directors" },
-  { href: "#calculator", label: "Cost calculator" },
-  { href: "#contact", label: "Contact" },
+  { href: "#calculator", label: "Estimate cost" },
+  { href: "#contact", label: "Enquiry" },
 ] as const;

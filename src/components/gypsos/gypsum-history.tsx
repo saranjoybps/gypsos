@@ -15,19 +15,19 @@ function Chapter({ n, kicker, title, children, visual, pinned }: { n: string; ki
   // Pinned (every screen size): one full-screen panel per chapter, fitted to the viewport height with svh-based sizing.
   // Unpinned (reduced motion): a plain stacked article.
   const shell = pinned
-    ? "relative flex h-svh w-screen shrink-0 flex-col gap-[2svh] px-6 pb-[52px] pt-[max(25svh,172px)] sm:px-10 lg:flex-row lg:items-center lg:gap-[5vw] lg:px-[7vw] lg:pb-[8vh] lg:pt-[max(28vh,220px)]"
+    ? "relative flex h-svh w-screen shrink-0 flex-col gap-[2svh] px-6 pb-[52px] pt-[max(25svh,172px)] sm:px-10 lg:flex-row lg:items-center lg:gap-[5vw] lg:px-[7vw] lg:pb-[max(13svh,84px)] lg:pt-[max(25svh,196px)]"
     : "relative flex flex-col justify-center gap-10 px-6 py-14 sm:px-10 lg:flex-row lg:items-center lg:gap-[5vw] lg:px-[7vw] lg:py-20";
   return (
     <article className={shell}>
       <span aria-hidden="true" className="outline-text pointer-events-none absolute bottom-12 right-4 select-none font-serif text-[22vw] font-medium leading-none text-white/10 lg:bottom-[9vh] lg:right-[3vw] lg:text-[14vw]">
         {n}
       </span>
-      <div className="relative z-10 max-w-[520px] shrink-0 lg:w-[34vw] lg:max-w-none">
+      <div className="relative z-10 max-w-[520px] shrink-0 lg:w-[38vw] lg:max-w-none">
         <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-ochre sm:tracking-[0.42em]">{kicker}</p>
-        <h3 className="mt-2 font-serif text-[clamp(23px,3.7svh,34px)] font-medium leading-[1.04] text-cream lg:mt-4 lg:text-[clamp(34px,4.4vw,68px)] lg:leading-[1.02]">{title}</h3>
-        <div className="mt-2.5 space-y-2 text-[clamp(11px,1.75svh,14.5px)] leading-[1.55] text-cream/75 lg:mt-6 lg:space-y-4 lg:text-[14.5px] lg:leading-[1.8]">{children}</div>
+        <h3 className="mt-2 font-serif text-[clamp(23px,3.7svh,34px)] font-medium leading-[1.04] text-cream lg:mt-3 lg:text-[clamp(30px,min(4vw,6.5svh),60px)] lg:leading-[1.02]">{title}</h3>
+        <div className="mt-2.5 space-y-2 text-[clamp(11px,1.75svh,14.5px)] leading-[1.55] text-cream/75 lg:mt-4 lg:space-y-3 lg:text-[clamp(13px,2svh,15px)] lg:leading-[1.65]">{children}</div>
       </div>
-      <div className={pinned ? "relative z-10 min-h-0 flex-1 lg:w-[46vw] lg:flex-none" : "relative z-10 lg:w-[46vw]"}>{visual}</div>
+      <div className={pinned ? "relative z-10 min-h-0 flex-1 lg:w-[42vw] lg:flex-none" : "relative z-10 lg:w-[42vw]"}>{visual}</div>
     </article>
   );
 }

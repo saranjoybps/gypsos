@@ -33,6 +33,33 @@ body {
   font-family: var(--font-manrope), sans-serif;
 }
 
+/* Global side gutter: one place controls left/right padding for every section and the footer.
+   Unlayered, so it overrides the per-section px-* utilities. The pinned hero (#top) and the
+   horizontal history (#history) are excluded because their layouts are sized in vw/svh. */
+:root {
+  --page-gutter: clamp(1.25rem, 5vw, 4rem);
+}
+
+main > section:not(#top):not(#history),
+body > footer {
+  padding-inline: var(--page-gutter);
+}
+
+/* Invoice printing / Save as PDF */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+@media print {
+  body {
+    background: #fff;
+  }
+  .invoice-sheet {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
 ::selection {
   background: #b79a6b;
   color: #fff8ec;

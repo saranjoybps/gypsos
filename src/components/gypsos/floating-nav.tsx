@@ -34,16 +34,13 @@ export function FloatingNav() {
             <Logo className="w-[104px] sm:w-[124px]" />
           </a>
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Sections">
-            {NAV_LINKS.slice(1).map((link) => (
+            {NAV_LINKS.map((link) => (
               <a key={link.href} href={link.href} tabIndex={visible ? 0 : -1} className="link-underline text-[11px] uppercase tracking-[0.2em] text-cream/75 transition-colors hover:text-cream">
                 {link.label}
               </a>
             ))}
           </nav>
           <div className="flex items-center gap-4">
-            <a href="#calculator" tabIndex={visible ? 0 : -1} className="hidden bg-ochre px-4 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-graphite transition-colors btn-sweep [--sweep:var(--color-cream)] sm:inline-block">
-              Estimate cost
-            </a>
             <button type="button" tabIndex={visible ? 0 : -1} aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)}>
               <LayoutGrid strokeWidth={1.25} size={18} />
             </button>

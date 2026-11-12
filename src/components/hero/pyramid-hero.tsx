@@ -140,10 +140,11 @@ export function PyramidHero() {
             style={live ? { y: copyY, opacity: copyOpacity, pointerEvents: copyEvents } : undefined}
           >
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-              <span className="bg-ochre px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.28em] text-graphite">Est. 2020</span>
+              <span className="bg-ochre px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.28em] text-graphite">Est. 2026</span>
               <p className="text-[11px] font-bold uppercase tracking-[0.34em] text-cream [text-shadow:0_1px_12px_rgba(28,26,24,0.6)]">
               GYPSOS Premium Grade Gypsum Plaster
             </p>
+              <span className="border border-cream/70 px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.28em] text-cream [text-shadow:0_1px_12px_rgba(28,26,24,0.6)]">Grade: HDMR-IYRA</span>
             </div>
             <h1 className="mt-[2.4svh] font-sans text-[clamp(40px,min(7.6vw,13svh),112px)] font-extrabold uppercase leading-[0.9] tracking-[-0.03em] text-cream [text-shadow:0_2px_30px_rgba(28,26,24,0.55)]">
               Smooth walls.

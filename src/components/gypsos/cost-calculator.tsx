@@ -28,7 +28,7 @@ export function CostCalculator() {
           </ScrubIn>
           <WordReveal text="Estimate your plastering cost in seconds." className="mt-5 font-serif text-[clamp(36px,4.8vw,72px)] font-medium leading-[1.04] text-graphite" />
           <ScrubIn y={24} className="mt-8 max-w-md text-[15px] leading-7 text-graphite/75">
-            <p>Choose the property type, enter the total area, and the estimate updates instantly.</p>
+            <p>Choose the property type, enter the total buildup area, and the estimate updates instantly.</p>
           </ScrubIn>
         </div>
 
@@ -56,7 +56,7 @@ export function CostCalculator() {
 
             <div className="mt-8">
               <label htmlFor={areaId} className="text-[11px] font-semibold uppercase tracking-[0.3em]">
-                2. Total area (sq. ft.)
+                2. Total buildup area
               </label>
               <div className="mt-4 flex items-stretch border border-graphite/30 focus-within:border-ochre-deep focus-within:outline focus-within:outline-2 focus-within:outline-ochre/60">
                 <input
@@ -82,11 +82,20 @@ export function CostCalculator() {
               {result.ok ? (
                 <dl className="space-y-3 text-[14px]">
                   <Row label="Property type" value={result.type === "residential" ? "Residential" : "Commercial"} />
-                  <Row label="Area entered" value={`${num(result.area)} sq. ft.`} />
+                  <Row label="Buildup area entered" value={`${num(result.area)} sq. ft.`} />
+                  <Row label="GYPSOS gypsum plaster rate" value={`${inr(result.rate)} per sq. ft.`} />
+                  <Row label="Cement plaster rate" value={`${inr(result.cementRate)} per sq. ft.`} />
+                  <Row label="Cement plaster total" value={inr(result.cementTotal)} />
                   <div className="flex items-end justify-between gap-4 border-t border-graphite/20 pt-5">
                     <dt className="text-[11px] font-semibold uppercase tracking-[0.3em]">Estimated total</dt>
                     <dd key={result.total} className="total-pop font-serif text-[clamp(34px,4vw,52px)] font-semibold leading-none text-ochre-deep" data-testid="estimate-total">
                       {inr(result.total)}
+                    </dd>
+                  </div>
+                  <div className="flex items-end justify-between gap-4 bg-graphite px-4 py-4 text-cream">
+                    <dt className="text-[11px] font-semibold uppercase tracking-[0.3em]">You save with GYPSOS</dt>
+                    <dd className="font-serif text-[clamp(24px,3vw,36px)] font-semibold leading-none text-ochre" data-testid="estimate-savings">
+                      {inr(result.savings)}
                     </dd>
                   </div>
                 </dl>

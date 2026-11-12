@@ -25,7 +25,7 @@ export function BrandIntro() {
 
       <div className="relative mx-auto max-w-[1180px]">
         <ScrubIn y={24} className="text-center">
-          <p className="text-[10px] font-medium uppercase tracking-[0.46em] text-ochre-deep">GYPSOS Buildtech India Private Limited · Est. 2020</p>
+          <p className="text-[10px] font-medium uppercase tracking-[0.46em] text-ochre-deep">GYPSOS Buildtech India Private Limited · Est. 2026</p>
         </ScrubIn>
 
         <WordReveal
@@ -35,7 +35,7 @@ export function BrandIntro() {
 
         <div className="mt-16 grid items-start gap-12 lg:mt-24 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <ScrubIn x={-30} className="max-w-md text-[15px] leading-[1.8] text-ink/85 lg:justify-self-end">
-            <p>GYPSOS is a gypsum plaster brand established in 2020, supplying and distributing gypsum plaster products across India.</p>
+            <p>GYPSOS is a gypsum plaster brand established in 2026, supplying and distributing gypsum plaster products across India.</p>
             <p className="mt-5">
               At GYPSOS, we believe premium quality should not come at a premium price. We focus on delivering superior-grade gypsum plaster with excellent finishing,
               consistent quality and reliable performance at an affordable cost.
