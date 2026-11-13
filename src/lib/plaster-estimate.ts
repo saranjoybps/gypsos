@@ -20,6 +20,8 @@ export type EstimateResult =
       cementRate: number;
       cementTotal: number;
       savings: number;
+      /** Saving as a percentage of the cement plaster cost. */
+      savingsPercent: number;
     };
 
 const round2 = (value: number) => Math.round((value + Number.EPSILON) * 100) / 100;
@@ -49,6 +51,7 @@ export function estimate(type: PropertyType, rawArea: string): EstimateResult {
     cementRate: CEMENT_RATE_PER_UNIT,
     cementTotal,
     savings: round2(cementTotal - total),
+    savingsPercent: cementTotal > 0 ? round2(((cementTotal - total) / cementTotal) * 100) : 0,
   };
 }
 
